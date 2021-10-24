@@ -1,6 +1,4 @@
 -- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
 
 insert into users (id, name, email, password, photo_url) values (1, 'Deina Wakeford', 'dwakeford0@ovh.net', 'gqGfiqksDE', 'http://dummyimage.com/193x232.png/cc0000/ffffff');
 insert into users (id, name, email, password, photo_url) values (2, 'Nannie Mc Meekin', 'nmc1@bing.com', 'wnyPuc', 'http://dummyimage.com/100x141.png/cc0000/ffffff');

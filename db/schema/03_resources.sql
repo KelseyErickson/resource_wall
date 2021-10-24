@@ -6,6 +6,6 @@ CREATE TABLE resources (
   tag_id INTEGER REFERENCES tags(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   description TEXT,
-  url VARCHAR(255) NOT NULL,
-  thumbnail_photo_url VARCHAR(255) NOT NULL
+  url VARCHAR(65535) NOT NULL,
+  thumbnail_photo_url VARCHAR(65535) NOT NULL
 );
