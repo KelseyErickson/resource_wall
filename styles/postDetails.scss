@@ -14,11 +14,20 @@
     }
 
   }
-
   .detailsCard{
     width: 45%;
   }
+
+  footer {
+    display: flex;
+    justify-content: right;
+
+    .btn :hover{
+      color:red;
+    }
+  }
 }
+
 
 
 
