@@ -16,4 +16,4 @@ module.exports = () => {
     res.render("login");
   });
   return router;
-}; 
+};
