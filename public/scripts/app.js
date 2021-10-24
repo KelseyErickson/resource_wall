@@ -41,12 +41,11 @@ $(document).ready(function() {
   };
 
   const loadResources = () => {
-    //  load existing tweets
+    //  load existing resources
     $.ajax('/api/resources', { method: 'GET'})
     .then(function (data) {
       
       renderResources(data.resources);
-      // console.log(data)
     });
 
   };

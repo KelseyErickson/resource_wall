@@ -13,7 +13,7 @@ module.exports = () => {
   // const templateVars = { user: activeUser([req.session.user_id], users) };
   // res.render("login", templateVars);
 
-    res.render("login");
+    res.render("registration");
   });
   return router;
 }; 
