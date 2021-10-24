@@ -1,3 +1,24 @@
-.commentSection {
-  color: blue;
+
+
+.mainContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem;
+
+  .commentSection {
+  width: 50%;
+  height: 50%;
+
+    .commentCard {
+      margin-top: 1rem;
+    }
+
+  }
+
+  .detailsCard{
+    width: 45%;
+  }
 }
+
+
+
