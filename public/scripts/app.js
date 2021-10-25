@@ -44,36 +44,36 @@ $(document).ready(function() {
     //  load existing resources
     $.ajax('/api/resources', { method: 'GET'})
     .then(function (data) {
-
       renderResources(data.resources);
     });
 
   };
 
+
+
   // //  load old tweets
   loadResources();
 
-//Search funtionality
+  function search(params) {
+    $.ajax(`/api/resources/${params}`, { method: 'GET'})
+    .then(function (data) {
+      renderResources(data.resources);
+    });
 
-
-  // $searchPropertyForm.on('submit', function(event) {
-  //   event.preventDefault();
-  //   const data = $(this).serialize();
-
-  //   getAllListings(data).then(function( json ) {
-  //     propertyListings.addProperties(json.properties);
-  //     views_manager.show('listings');
-  //   });
-  // });
+  }
 
   $("#searchForm").on("submit", function(event) {
     event.preventDefault();
     const searchData = $(this).children("input").val();
-    console.log(searchData)
+    search(searchData);
+
+    });
 
 
   });
 
-});
+
+
+
 
 
