@@ -33,8 +33,12 @@ $(document).ready(function() {
       <div class="card-body">
         <h5 class="card-title">"${resourceData.title}"</h5>
         <p class="card-text">"${resourceData.description}"</p>
-        <a href="${resourceData.url}" class="btn btn-primary">Go somewhere</a>
+        <a href="${resourceData.url}" class="btn btn-primary">Go To Resource</a>
       </div>
+      <footer>
+            <p>Rating</p>
+            <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+        </footer>
     </div>
     `;
     return markup;
