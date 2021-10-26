@@ -23,15 +23,15 @@
     <%- include('partials/_header') %>
   </header>
   <!-- Card for Resource -->
-  <div class="mainContainer">
+  <div class="mainContainer" id="detailsContainer">
     <div class="card detailsCard">
-      <img src="..." class="card-img-top" alt="...">
+      <img src= "<%= thumbnail_photo_url %>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
+        <h5 class="card-title"><%= title %></h5>
+        <p class="card-text"><%= description %></p>
+        <a href="<%= url %>"class="btn btn-primary">Go To Resource</a>
           <footer>
-            <p>Rating</p>
+            <p><%= rating %><%= '/5' %></p>
           <button class="btn"><i class="far fa-heart"></i></button>
         </footer>
       </div>
@@ -45,10 +45,10 @@
       <!-- Card for Comments -->
       <div class="card commentCard">
         <div class="card-header">
-          User
+          <%= user_name %>
         </div>
         <div class="card-body">
-          <p class="card-text">Comment</p>
+          <p class="card-text"><%= comment %></p>
         </div>
       </div>
     </div>
