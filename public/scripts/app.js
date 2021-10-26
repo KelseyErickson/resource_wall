@@ -59,19 +59,23 @@ $(document).ready(function() {
     .then(function (data) {
       renderResources(data.resources);
     });
-
   }
 
   $("#searchForm").on("submit", function(event) {
     event.preventDefault();
     const searchData = $(this).children("input").val();
     search(searchData);
-
     });
 
-
+    $("#mypins").on("click", function(event) {
+      event.preventDefault();
+      $.ajax(`/mypins/`, { method: 'GET'})
+    .then(function (data) {
+      renderResources(data.resources);
+    });
   });
 
+  });
 
 
 

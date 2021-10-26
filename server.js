@@ -45,6 +45,7 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const resourcesRoutes = require("./routes/resources")
+const myPins = require("./routes/mypins")
 const reviewsRoutes = require("./routes/reviews")
 const tagsRoutes = require("./routes/tags")
 const loginRoutes = require("./routes/login")
@@ -56,7 +57,8 @@ const registrationRoutes = require("./routes/registration")
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/resources", resourcesRoutes(db));
-app.use("/api/revies", reviewsRoutes(db));
+app.use("/mypins", myPins(db));
+app.use("/api/reviews", reviewsRoutes(db));
 app.use("/api/tags", tagsRoutes(db));
 app.use("/login", loginRoutes());
 app.use("/newPost", newPostRoutes());

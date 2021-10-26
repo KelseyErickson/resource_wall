@@ -9,15 +9,16 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-
-//if cookie true mypins
-
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM resources`;
+    const user = (req.session.user_id);
+    const value = [user];
+    let query = `SELECT * FROM resources WHERE user_id = $1`;
     console.log(query);
-    db.query(query)
+    console.log(user)
+    db.query(query, value)
       .then(data => {
         const resources = data.rows;
+        res.render
         res.json({ resources });
       })
       .catch(err => {
@@ -25,30 +26,6 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
-
-
-
-  });
-
-// Route to get seach parameter and query with that parameter
-  router.get("/:searchId", (req, res) => {
-    const keyWord = req.params.searchId;
-    let query = `SELECT * FROM resources WHERE UPPER(title) LIKE UPPER($1)`;
-    let params = [`%${keyWord}%`];
-    db.query(query, params)
-      .then(data => {
-        const resources = data.rows;
-        res.json({ resources });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-
-
-    console.log(query, params)
-
   });
   return router;
 };
