@@ -34,6 +34,7 @@ $(document).ready(function() {
         <h5 class="card-title">"${resourceData.title}"</h5>
         <p class="card-text">"${resourceData.description}"</p>
         <a href="${resourceData.url}" class="btn btn-primary">Go To Resource</a>
+        <a href="/details/${resourceData.id}">Details</a>
       </div>
       <footer>
             <p>Rating</p>
@@ -58,6 +59,13 @@ $(document).ready(function() {
   // //  load old tweets
   loadResources();
 
+  $(".far").on("click", function(event) {
+    event.preventDefault();
+    console.log('yo')
+
+  });
+
+
   function search(params) {
     $.ajax(`/api/resources/${params}`, { method: 'GET'})
     .then(function (data) {
@@ -77,7 +85,9 @@ $(document).ready(function() {
     .then(function (data) {
       renderResources(data.resources);
     });
+
   });
+
 
   });
 
