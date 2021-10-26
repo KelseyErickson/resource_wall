@@ -18,7 +18,6 @@ module.exports = (db) => {
     db.query(query, value)
       .then(data => {
         const resources = data.rows;
-        res.render
         res.json({ resources });
       })
       .catch(err => {
