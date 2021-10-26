@@ -51,6 +51,8 @@ const tagsRoutes = require("./routes/tags")
 const loginRoutes = require("./routes/login")
 const newPostRoutes = require("./routes/newPost")
 const registrationRoutes = require("./routes/registration")
+const detailsRoutes = require("./routes/details")
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -63,6 +65,7 @@ app.use("/api/tags", tagsRoutes(db));
 app.use("/login", loginRoutes());
 app.use("/newPost", newPostRoutes());
 app.use("/registration", registrationRoutes());
+app.use("/details", detailsRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
