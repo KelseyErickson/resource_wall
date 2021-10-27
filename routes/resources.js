@@ -14,7 +14,8 @@ module.exports = (db) => {
 //if cookie true mypins
 
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM resources`;
+    let query = `SELECT * FROM resources
+                ORDER BY rating`;
     console.log(query);
     db.query(query)
       .then(data => {
