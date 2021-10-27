@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 
@@ -50,5 +51,13 @@ module.exports = (db) => {
     console.log(query, params)
 
   });
+
+  router.post("/:id/reviews", (req, res)=> {
+    console.log(req.body);
+    db.query(`insert into reviews (user_id, resource_id, comment) values ($1, $2,$3);`, [req.session.user_id, req. params.id, req.body.comment])
+    .then(data => {
+      res.redirect("/details/"+req.params.id)
+    })
+  })
   return router;
 };

@@ -1,5 +1,5 @@
-insert into tags (id, tag_title) values (1, 'CSS');
-insert into tags (id, tag_title) values (2, 'DataBase');
-insert into tags (id, tag_title) values (3, 'HTML');
-insert into tags (id, tag_title) values (4, 'GitHub');
-insert into tags (id, tag_title) values (5, 'JavaScript');
+insert into tags (tag_title) values ('CSS');
+insert into tags (tag_title) values ('DataBase');
+insert into tags (tag_title) values ('HTML');
+insert into tags (tag_title) values ('GitHub');
+insert into tags (tag_title) values ('JavaScript');

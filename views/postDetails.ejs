@@ -25,30 +25,39 @@
   <!-- Card for Resource -->
   <div class="mainContainer" id="detailsContainer">
     <div class="card detailsCard">
-      <img src= "<%= thumbnail_photo_url %>" class="card-img-top" alt="...">
+      <img src= "<%= resource.thumbnail_photo_url %>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= title %></h5>
-        <p class="card-text"><%= description %></p>
-        <a href="<%= url %>"class="btn btn-primary">Go To Resource</a>
+        <h5 class="card-title"><%= resource.title %></h5>
+        <p class="card-text"><%= resource.description %></p>
+        <a href="<%= resource.url %>"class="btn btn-primary">Go To Resource</a>
           <footer>
-            <p><%= rating %><%= '/5' %></p>
+
           <button class="btn"><i class="far fa-heart"></i></button>
         </footer>
       </div>
     </div>
     <!-- Comment Bar -->
     <div class="commentSection">
-      <form class="d-flex">
-        <input class="form-control me-2" type="comment" placeholder="Comment">
+      <form class="d-flex" method="post" action="/api/resources/<%=resource.id%>/reviews">
+        <input class="form-control me-2" type="comment" placeholder="Comment" name="comment">
         <button class="btn btn-outline-success" type="submit">Submit</button>
       </form>
       <!-- Card for Comments -->
       <div class="card commentCard">
         <div class="card-header">
-          <%= user_name %>
+          <%= user.name %>
         </div>
         <div class="card-body">
-          <p class="card-text"><%= comment %></p>
+          <ul class="list-group">
+          <%for (const review of reviews) {%>
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold"><%=review.name %></div>
+                  <%= review.comment %>
+                </div>
+              </li>
+              <%}%>
+            </ul>
         </div>
       </div>
     </div>

@@ -12,8 +12,7 @@ module.exports = () => {
   router.get("/", (req, res) => {
   // const templateVars = { user: activeUser([req.session.user_id], users) };
   // res.render("login", templateVars);
-
-    res.render("registration");
+  res.render("registration");
   });
   return router;
 };
