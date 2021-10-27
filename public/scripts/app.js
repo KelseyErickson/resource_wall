@@ -36,7 +36,8 @@ $(document).ready(function () {
         <a href="/details/${resourceData.id}">Details</a>
       </div>
       <footer>
-      <a class="btn btn-upvote" data-id="${resourceData.id}">Upvote</i></a>
+      <a class="btn-upvote" data-id="${resourceData.id}">Upvote</a>
+      <a class="btn-downvote" data-id="${resourceData.id}">DownVote</a>
       <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
         </footer>
     </div>
@@ -95,6 +96,21 @@ $(document).ready(function () {
 
 
   })
+
+  $('#resource-container').on("click", '.btn-downvote', function (event) {
+    event.preventDefault();
+    const id = $(this).data("id");
+    console.log(id)
+    $.ajax(`/api/resources/${id}/downvote`, { method: 'POST' })
+       .then(function (data) {
+
+       });
+
+
+
+
+  })
+
 
 
 });
