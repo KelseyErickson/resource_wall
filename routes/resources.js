@@ -52,6 +52,7 @@ module.exports = (db) => {
 
   });
 
+  //Add comments to detials page
   router.post("/:id/reviews", (req, res)=> {
     console.log(req.body);
     db.query(`insert into reviews (user_id, resource_id, comment) values ($1, $2,$3);`, [req.session.user_id, req. params.id, req.body.comment])
@@ -59,5 +60,14 @@ module.exports = (db) => {
       res.redirect("/details/"+req.params.id)
     })
   })
-  return router;
+
+  //Add an upvote
+  router.post("/:id/upvote", (req, res)=> {
+    db.query(` Update resources SET rating = rating +1 WHERE resources.id = $1 ;`, [req.params.id])
+    .then(data => {
+      res.json(data);
+    })
+  })
+
+ return router;
 };
