@@ -69,5 +69,13 @@ module.exports = (db) => {
     })
   })
 
+  //Add a downvote
+  router.post("/:id/downvote", (req, res)=> {
+    db.query(` Update resources SET rating = rating -1 WHERE resources.id = $1 ;`, [req.params.id])
+    .then(data => {
+      res.json(data);
+    })
+  })
+
  return router;
 };
