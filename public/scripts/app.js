@@ -36,8 +36,8 @@ $(document).ready(function () {
         <a href="/details/${resourceData.id}">Details</a>
       </div>
       <footer>
-      <a class="btn-upvote" data-id="${resourceData.id}">Upvote</a>
-      <a class="btn-downvote" data-id="${resourceData.id}">DownVote</a>
+      <a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
+      <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>
       <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
         </footer>
     </div>
@@ -92,9 +92,6 @@ $(document).ready(function () {
 
        });
 
-
-
-
   })
 
   $('#resource-container').on("click", '.btn-downvote', function (event) {
@@ -105,9 +102,6 @@ $(document).ready(function () {
        .then(function (data) {
 
        });
-
-
-
 
   })
 
