@@ -33,12 +33,15 @@ $(document).ready(function () {
         <h5 class="card-title">"${resourceData.title}"</h5>
         <p class="card-text">"${resourceData.description}"</p>
         <a href="${resourceData.url}" class="btn btn-primary">Go To Resource</a>
-        <a href="/details/${resourceData.id}">Details</a>
+
       </div>
       <footer>
+      <a href="/details/${resourceData.id}" class="detailsLink" >Details</a>
+      <div>
       <a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
       <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>
       <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+      <div>
         </footer>
     </div>
     `;
