@@ -9,19 +9,14 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM reviews`;
-    console.log(query);
-    db.query(query)
-      .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  router.post("/:id", (req, res)=> {
+    console.log(req.params.id)
+    db.query(`"UPDATE resources SET rating = rating + 1 WHERE resource.id = $1;`, [req.params.id])
+    .then(data => {
+      res.redirect("/index")
+    })
+  })
+
+
   return router;
 };

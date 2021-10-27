@@ -3,6 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+
 $(document).ready(function() {
 
   const renderResources = (resources) => {
@@ -25,7 +26,7 @@ $(document).ready(function() {
   };
 
   const createResourceElement = (resourceData) => {
-
+    console.log(resourceData)
     //  resource html
     const markup = `
     <div class="card" style="width: 18rem;">
@@ -37,9 +38,11 @@ $(document).ready(function() {
         <a href="/details/${resourceData.id}">Details</a>
       </div>
       <footer>
-            <p>Rating</p>
+      <form class="d-flex" method="post" action="/api/reviews/${resourceData.id}">
+      <button class="btn btn-like" id="upvote" type="submit">Upvote</button>
             <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
         </footer>
+        </form>
     </div>
     `;
     return markup;
@@ -56,15 +59,10 @@ $(document).ready(function() {
 
 
 
-  // //  load old tweets
+  // Load all resources
   loadResources();
 
-  $(".far").on("click", function(event) {
-    event.preventDefault();
-    console.log('yo')
-
-  });
-
+  //Search
 
   function search(params) {
     $.ajax(`/api/resources/${params}`, { method: 'GET'})
@@ -79,6 +77,8 @@ $(document).ready(function() {
     search(searchData);
     });
 
+  // Load My Pins
+
     $("#mypins").on("click", function(event) {
       event.preventDefault();
       $.ajax(`/mypins/`, { method: 'GET'})
@@ -87,6 +87,18 @@ $(document).ready(function() {
     });
 
   });
+
+  // ratings
+
+
+
+  // $( '#resource-container' ).on('click', '#upvote', function () {
+  //   $.ajax(`/api/reviews`, { method: 'GET'})
+  //   .then(function (data) {
+  //     console.log(data)
+  //   });
+  // });
+
 
 
   });

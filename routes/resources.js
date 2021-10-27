@@ -59,5 +59,10 @@ module.exports = (db) => {
       res.redirect("/details/"+req.params.id)
     })
   })
+
+
+
   return router;
 };
+
+
