@@ -7,5 +7,6 @@ CREATE TABLE resources (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   url VARCHAR(65535) NOT NULL,
-  thumbnail_photo_url VARCHAR(65535) NOT NULL
+  thumbnail_photo_url VARCHAR(65535) NOT NULL,
+  rating SMALLINT NOT NULL DEFAULT 0
 );
