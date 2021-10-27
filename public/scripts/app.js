@@ -3,7 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-$(document).ready(function() {
+$(document).ready(function () {
 
   const renderResources = (resources) => {
     const container = $('#resource-container');
@@ -25,7 +25,6 @@ $(document).ready(function() {
   };
 
   const createResourceElement = (resourceData) => {
-
     //  resource html
     const markup = `
     <div class="card" style="width: 18rem;">
@@ -37,8 +36,8 @@ $(document).ready(function() {
         <a href="/details/${resourceData.id}">Details</a>
       </div>
       <footer>
-            <p>Rating</p>
-            <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+      <a class="btn btn-upvote" data-id="${resourceData.id}">Upvote</i></a>
+      <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
         </footer>
     </div>
     `;
@@ -47,49 +46,58 @@ $(document).ready(function() {
 
   const loadResources = () => {
     //  load existing resources
-    $.ajax('/api/resources', { method: 'GET'})
-    .then(function (data) {
-      renderResources(data.resources);
-    });
+    $.ajax('/api/resources', { method: 'GET' })
+      .then(function (data) {
+        renderResources(data.resources);
+      });
 
   };
 
 
-
-  // //  load old tweets
   loadResources();
 
-  $(".far").on("click", function(event) {
-    event.preventDefault();
-    console.log('yo')
-
-  });
-
-
+// Search functionality
   function search(params) {
-    $.ajax(`/api/resources/${params}`, { method: 'GET'})
-    .then(function (data) {
-      renderResources(data.resources);
-    });
+    $.ajax(`/api/resources/${params}`, { method: 'GET' })
+      .then(function (data) {
+        renderResources(data.resources);
+      });
   }
 
-  $("#searchForm").on("submit", function(event) {
+  $("#searchForm").on("submit", function (event) {
     event.preventDefault();
     const searchData = $(this).children("input").val();
     search(searchData);
-    });
+  });
 
-    $("#mypins").on("click", function(event) {
-      event.preventDefault();
-      $.ajax(`/mypins/`, { method: 'GET'})
-    .then(function (data) {
-      renderResources(data.resources);
-    });
+  //Load My pins page
+
+  $("#mypins").on("click", function (event) {
+    event.preventDefault();
+    $.ajax(`/mypins/`, { method: 'GET' })
+      .then(function (data) {
+        renderResources(data.resources);
+      });
 
   });
 
+  // upvote button
+    $('#resource-container').on("click", '.btn-upvote', function (event) {
+    event.preventDefault();
+    const id = $(this).data("id");
+    console.log(id)
+    $.ajax(`/api/resources/${id}/upvote`, { method: 'POST' })
+       .then(function (data) {
 
-  });
+       });
+
+
+
+
+  })
+
+
+});
 
 
 
