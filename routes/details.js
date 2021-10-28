@@ -4,7 +4,7 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/:resourceid", (req, res) => {
-    let result = {};
+    let result = {user_id: req.session.user_id};
     db.query(`select * from resources where id=$1`, [req.params.resourceid])
     .then(({rows}) => {
       result.resource = rows[0];
