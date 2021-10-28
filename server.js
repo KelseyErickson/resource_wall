@@ -52,6 +52,7 @@ const loginRoutes = require("./routes/login")
 const newPostRoutes = require("./routes/newPost")
 const registrationRoutes = require("./routes/registration")
 const detailsRoutes = require("./routes/details")
+const logoutRoutes = require("./routes/logout")
 
 
 // Mount all resource routes
@@ -63,8 +64,9 @@ app.use("/mypins", myPins(db));
 app.use("/api/reviews", reviewsRoutes(db));
 app.use("/api/tags", tagsRoutes(db));
 app.use("/login", loginRoutes(db));
+app.use("/logout", logoutRoutes());
 app.use("/newPost", newPostRoutes());
-app.use("/registration", registrationRoutes());
+app.use("/registration", registrationRoutes(db));
 app.use("/details", detailsRoutes(db));
 
 // Home page
