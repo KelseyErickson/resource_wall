@@ -11,8 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    // const templateVars = { user: activeUser([req.session.user_id], users) };
-    // res.render("login", templateVars);
+
       res.render("login");
     });
 
@@ -26,17 +25,19 @@ module.exports = (db) => {
       console.log(query, params)
       db.query(query, params)
         .then(data => {
-          if(!data.rows.id){
+          console.log(data.rows)
+          if(data.rows.length === 0){
             return res.render('login')
           }
+
+          req.session.user_id = data.rows.id;
+          res.redirect('/')
         })
         .catch(err => {
           res
             .status(500)
             .json({ error: err.message });
         });
-
-          res.redirect('/')
 
     });
 
