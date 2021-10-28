@@ -14,7 +14,8 @@ module.exports = (db) => {
 //if cookie true mypins
 
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM resources`;
+    let query = `SELECT * FROM resources
+                ORDER BY rating`;
     console.log(query);
     db.query(query)
       .then(data => {
@@ -52,6 +53,7 @@ module.exports = (db) => {
 
   });
 
+  //Add comments to detials page
   router.post("/:id/reviews", (req, res)=> {
     console.log(req.body);
     db.query(`insert into reviews (user_id, resource_id, comment) values ($1, $2,$3);`, [req.session.user_id, req. params.id, req.body.comment])
@@ -60,9 +62,23 @@ module.exports = (db) => {
     })
   })
 
+  //Add an upvote
+  router.post("/:id/upvote", (req, res)=> {
+    db.query(` Update resources SET rating = rating +1 WHERE resources.id = $1 ;`, [req.params.id])
+    .then(data => {
+      res.json(data);
+    })
+  })
 
+  //Add a downvote
+  router.post("/:id/downvote", (req, res)=> {
+    db.query(` Update resources SET rating = rating -1 WHERE resources.id = $1 ;`, [req.params.id])
+    .then(data => {
+      res.json(data);
+    })
+  })
 
-  return router;
+ return router;
 };
 
 

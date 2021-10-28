@@ -3,8 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-
-$(document).ready(function() {
+$(document).ready(function () {
 
   const renderResources = (resources) => {
     const container = $('#resource-container');
@@ -26,7 +25,6 @@ $(document).ready(function() {
   };
 
   const createResourceElement = (resourceData) => {
-    console.log(resourceData)
     //  resource html
     const markup = `
     <div class="card" style="width: 18rem;">
@@ -35,12 +33,15 @@ $(document).ready(function() {
         <h5 class="card-title">"${resourceData.title}"</h5>
         <p class="card-text">"${resourceData.description}"</p>
         <a href="${resourceData.url}" class="btn btn-primary">Go To Resource</a>
-        <a href="/details/${resourceData.id}">Details</a>
       </div>
       <footer>
-      <form class="d-flex" method="post" action="/api/reviews/${resourceData.id}">
-      <button class="btn btn-like" id="upvote" type="submit">Upvote</button>
-            <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+      <a href="/details/${resourceData.id}" class="detailsLink" >Details</a>
+
+      <div>
+      <a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
+      <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>
+      <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+      <div>
         </footer>
         </form>
     </div>
@@ -50,58 +51,67 @@ $(document).ready(function() {
 
   const loadResources = () => {
     //  load existing resources
-    $.ajax('/api/resources', { method: 'GET'})
-    .then(function (data) {
-      renderResources(data.resources);
-    });
+    $.ajax('/api/resources', { method: 'GET' })
+      .then(function (data) {
+        renderResources(data.resources);
+      });
 
   };
 
 
-
-  // Load all resources
   loadResources();
 
-  //Search
-
+// Search functionality
   function search(params) {
-    $.ajax(`/api/resources/${params}`, { method: 'GET'})
-    .then(function (data) {
-      renderResources(data.resources);
-    });
+    $.ajax(`/api/resources/${params}`, { method: 'GET' })
+      .then(function (data) {
+        renderResources(data.resources);
+      });
   }
 
-  $("#searchForm").on("submit", function(event) {
+  $("#searchForm").on("submit", function (event) {
     event.preventDefault();
     const searchData = $(this).children("input").val();
     search(searchData);
-    });
+  });
 
-  // Load My Pins
+  //Load My pins page
 
-    $("#mypins").on("click", function(event) {
-      event.preventDefault();
-      $.ajax(`/mypins/`, { method: 'GET'})
-    .then(function (data) {
-      renderResources(data.resources);
-    });
+  $("#mypins").on("click", function (event) {
+    event.preventDefault();
+    $.ajax(`/mypins/`, { method: 'GET' })
+      .then(function (data) {
+        renderResources(data.resources);
+      });
 
   });
 
-  // ratings
+  // upvote button
+    $('#resource-container').on("click", '.btn-upvote', function (event) {
+    event.preventDefault();
+    const id = $(this).data("id");
+    console.log(id)
+    $.ajax(`/api/resources/${id}/upvote`, { method: 'POST' })
+       .then(function (data) {
+        loadResources()
+       });
+
+  })
+
+  $('#resource-container').on("click", '.btn-downvote', function (event) {
+    event.preventDefault();
+    const id = $(this).data("id");
+    console.log(id)
+    $.ajax(`/api/resources/${id}/downvote`, { method: 'POST' })
+       .then(function (data) {
+        loadResources()
+       });
+
+  })
 
 
 
-  // $( '#resource-container' ).on('click', '#upvote', function () {
-  //   $.ajax(`/api/reviews`, { method: 'GET'})
-  //   .then(function (data) {
-  //     console.log(data)
-  //   });
-  // });
-
-
-
-  });
+});
 
 
 
