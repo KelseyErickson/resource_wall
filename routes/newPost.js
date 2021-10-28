@@ -10,10 +10,11 @@ const router  = express.Router();
 
 module.exports = () => {
   router.get("/", (req, res) => {
-  // const templateVars = { user: activeUser([req.session.user_id], users) };
-  // res.render("login", templateVars);
+    const templateVars = {
+      user_id: req.session.user_id
+    };
 
-    res.render("newPost");
+    res.render("newPost", templateVars);
   });
   return router;
 };

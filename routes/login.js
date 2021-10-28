@@ -12,7 +12,13 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
 
-      res.render("login");
+    const templateVars = {
+
+      user_id: req.session.user_id
+
+    };
+
+      res.render("login", templateVars);
     });
 
   router.post('/', (req, res) => {
@@ -33,7 +39,8 @@ module.exports = (db) => {
             return res.render('login')
           }
 
-          req.session.user_id = data.rows.id;
+          req.session.user_id = data.rows[0].id;
+
 
           res.redirect('/')
         })

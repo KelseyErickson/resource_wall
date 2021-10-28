@@ -12,13 +12,12 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     const user_idCookie = req.session.user_id;
 
-  // const templateVars = {
-  //   userInfo: users[user_idCookie],
-  //   message: null
-  // };
+    const templateVars = {
 
+      user_id: req.session.user_id
 
-    res.render("registration");
+    };
+    res.render("registration", templateVars);
   });
 
 router.post('/', (req, res) => {
@@ -41,8 +40,6 @@ router.post('/', (req, res) => {
     console.log(query, params)
     db.query(query, params)
       .then(data => {
-
-
         req.session.user_id = data.rows.id;
 
         res.redirect('/')
