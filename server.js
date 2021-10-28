@@ -62,7 +62,7 @@ app.use("/api/resources", resourcesRoutes(db));
 app.use("/mypins", myPins(db));
 app.use("/api/reviews", reviewsRoutes(db));
 app.use("/api/tags", tagsRoutes(db));
-app.use("/login", loginRoutes());
+app.use("/login", loginRoutes(db));
 app.use("/newPost", newPostRoutes());
 app.use("/registration", registrationRoutes());
 app.use("/details", detailsRoutes(db));
