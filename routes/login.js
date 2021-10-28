@@ -34,6 +34,7 @@ module.exports = (db) => {
           }
 
           req.session.user_id = data.rows.id;
+
           res.redirect('/')
         })
         .catch(err => {
@@ -43,14 +44,6 @@ module.exports = (db) => {
         });
 
     });
-
-    // Logout
-// app.post('/logout', (req, res) => {
-
-//   req.session = null;
-//   res.redirect(`/urls`);
-
-// });
 
 
   return router;
