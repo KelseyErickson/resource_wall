@@ -36,7 +36,6 @@ $(document).ready(function () {
       </div>
       <footer>
       <a href="/details/${resourceData.id}" class="detailsLink" >Details</a>
-
       <div>
       <a>${resourceData.rating} </a><a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
       <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>

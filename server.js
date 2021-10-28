@@ -74,7 +74,6 @@ app.use("/details", detailsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  console.log('cookie', req.session.user_id)
   res.render("index", {user_id: req.session && req.session.user_id} );
 });
 
