@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   margin: 3rem;
+  padding: 2rem;
 
   .commentSection {
   width: 50%;
@@ -12,10 +13,6 @@
     .commentCard {
       margin-top: 1rem;
     }
-
-  }
-  .detailsCard{
-   max-width: 400px;
 
   }
 
@@ -36,6 +33,10 @@
       margin-top: 1rem;
     }
   }
+}
+
+.list-group-item{
+  margin-top: 1rem;
 }
 
 
