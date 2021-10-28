@@ -38,7 +38,7 @@ $(document).ready(function () {
       <a href="/details/${resourceData.id}" class="detailsLink" >Details</a>
 
       <div>
-      <a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
+      <a>${resourceData.rating}  </a><a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
       <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>
       <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
       <div>
@@ -108,6 +108,38 @@ $(document).ready(function () {
        });
 
   })
+
+  $(".newPostForm").on("submit", function (event) {
+    const id = $(this).data("id");
+    event.preventDefault();
+    const postData = $(this);
+    let title = $("#postTitle").val();
+    let imageURL = $("#ImageUrl").val();
+    let linkURL = $("#linkUrl").val();
+    let description = $("#description").val();
+    let tag = $("#tag option:selected").val();
+    if (tag === "CSS") {
+      tag = 1
+    } else if (tag === "Database") {
+      tag = 2
+    } else if (tag === "Html") {
+      tag = 3
+    } else if (tag === "Github") {
+      tag = 4
+    } else if (tag === "JavaScript") {
+      tag = 5
+    }
+
+    $.ajax({
+      url:`/api/resources/${id}/newPost`,  
+      method: 'POST',
+      data: {
+        title, imageURL, linkURL, description, tag
+      }
+    })
+      .then(function (data) {
+    });
+  });
 
 
 

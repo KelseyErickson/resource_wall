@@ -18,17 +18,11 @@ module.exports = (db) => {
         })
       })
     })
-    // db.query(query, params)
-    //   .then(data => {
-    //     let templateVars = (data.rows[0])
-    //     console.log(templateVars)
-    //     res.render('./postDetails', templateVars)
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   });
   return router;
 };
