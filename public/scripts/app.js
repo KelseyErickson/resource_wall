@@ -28,11 +28,11 @@ $(document).ready(function () {
     //  resource html
     const markup = `
     <div class="card" style="width: 18rem;">
-      <img src="${resourceData.thumbnail_photo_url}" class="card-img-top" alt="...">
+      <img src=${resourceData.thumbnail_photo_url} class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">"${resourceData.title}"</h5>
-        <p class="card-text">"${resourceData.description}"</p>
-        <a href="${resourceData.url}" class="btn btn-primary">Go To Resource</a>
+        <h5 class="card-title">${resourceData.title}</h5>
+        <p class="card-text">${resourceData.description}</p>
+        <a href=${resourceData.url} class="btn btn-primary">Go To Resource</a>
       </div>
       <footer>
       <a href="/details/${resourceData.id}" class="detailsLink" >Details</a>
