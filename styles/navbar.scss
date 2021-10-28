@@ -1,6 +1,10 @@
+.bg-primary {
+  background-color: #0d6efd!important;
+}
+
+
 nav {
   height: 5rem;
-
 
 
 .searchBtn {
@@ -23,10 +27,17 @@ nav {
 .container-fluid {
    background-color: #0d6efd;
    z-index: 1;
+   color:white;
 
 
 
  }
+
+ .btn-logout{
+  color: rgba(255,255,255,.55);
+  margin:0;
+ }
+
 
 
 

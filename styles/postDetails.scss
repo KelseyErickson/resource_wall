@@ -15,7 +15,13 @@
 
   }
   .detailsCard{
-    width: 45%;
+   max-width: 400px;
+
+  }
+
+  .card-img-top{
+    max-width: 100%;
+    justify-self: center;
   }
 
   footer {
