@@ -10,13 +10,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const user_idCookie = req.session.user_id;
 
     const templateVars = {
 
       user_id: req.session.user_id
 
     };
+
     res.render("registration", templateVars);
   });
 
@@ -34,14 +34,14 @@ router.post('/', (req, res) => {
 
 
     let query = `INSERT INTO users (name, email, password, photo_url)
-    values ($1, $2, $3, $4);`;
+    values ($1, $2, $3, $4)
+    RETURNING *;`;
 
     let params = [name, email, password, profilePic];
     console.log(query, params)
     db.query(query, params)
       .then(data => {
-        req.session.user_id = data.rows.id;
-
+        req.session.user_id = data.rows[0].id;
         res.redirect('/')
       })
       .catch(err => {

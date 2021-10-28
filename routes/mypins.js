@@ -10,7 +10,9 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+
     const user = (req.session.user_id);
+
     const value = [user];
     let query = `SELECT * FROM resources WHERE user_id = $1`;
     console.log(query);
