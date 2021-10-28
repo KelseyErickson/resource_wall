@@ -29,6 +29,9 @@ module.exports = (db) => {
           if(data.rows.length === 0){
             return res.render('login')
           }
+          if(data.rows[0].password !== req.body.password){
+            return res.render('login')
+          }
 
           req.session.user_id = data.rows.id;
           res.redirect('/')
