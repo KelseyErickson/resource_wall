@@ -4,24 +4,19 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function () {
-
   const renderResources = (resources) => {
-    const container = $('#resource-container');
+    const container = $("#resource-container");
 
     container.empty();
 
     // loops through resources
     for (const resource of resources) {
-
-
       // calls createResourceElement for each resource
       const oldResource = createResourceElement(resource);
-
 
       // takes return value and appends it to the resource container
       container.prepend(oldResource);
     }
-
   };
 
   const createResourceElement = (resourceData) => {
@@ -50,22 +45,18 @@ $(document).ready(function () {
 
   const loadResources = () => {
     //  load existing resources
-    $.ajax('/api/resources', { method: 'GET' })
-      .then(function (data) {
-        renderResources(data.resources);
-      });
-
+    $.ajax("/api/resources", { method: "GET" }).then(function (data) {
+      renderResources(data.resources);
+    });
   };
-
 
   loadResources();
 
-// Search functionality
+  // Search functionality
   function search(params) {
-    $.ajax(`/api/resources/${params}`, { method: 'GET' })
-      .then(function (data) {
-        renderResources(data.resources);
-      });
+    $.ajax(`/api/resources/${params}`, { method: "GET" }).then(function (data) {
+      renderResources(data.resources);
+    });
   }
 
   $("#searchForm").on("submit", function (event) {
@@ -78,39 +69,39 @@ $(document).ready(function () {
 
   $("#mypins").on("click", function (event) {
     event.preventDefault();
-    $.ajax(`/mypins/`, { method: 'GET' })
-      .then(function (data) {
-        renderResources(data.resources);
-      });
-
+    $.ajax(`/mypins/`, { method: "GET" }).then(function (data) {
+      renderResources(data.resources);
+    });
   });
 
   // upvote button
-    $('#resource-container').on("click", '.btn-upvote', function (event) {
+  $("#resource-container").on("click", ".btn-upvote", function (event) {
     event.preventDefault();
     const id = $(this).data("id");
-    console.log(id)
-    $.ajax(`/api/resources/${id}/upvote`, { method: 'POST' })
-       .then(function (data) {
-        loadResources()
-       });
+    console.log(id);
+    $.ajax(`/api/resources/${id}/upvote`, { method: "POST" }).then(function (
+      data
+    ) {
+      loadResources();
+    });
+  });
 
-  })
-
-  $('#resource-container').on("click", '.btn-downvote', function (event) {
+  $("#resource-container").on("click", ".btn-downvote", function (event) {
     event.preventDefault();
     const id = $(this).data("id");
-    console.log(id)
-    $.ajax(`/api/resources/${id}/downvote`, { method: 'POST' })
-       .then(function (data) {
-        loadResources()
-       });
-
-  })
+    console.log(id);
+    $.ajax(`/api/resources/${id}/downvote`, { method: "POST" }).then(function (
+      data
+    ) {
+      loadResources();
+    });
+  });
 
   $(".newPostForm").on("submit", function (event) {
     const id = $(this).data("id");
     event.preventDefault();
+    // console.log(event);
+    // window.location = "/";
     const postData = $(this);
     let title = $("#postTitle").val();
     let imageURL = $("#ImageUrl").val();
@@ -118,34 +109,36 @@ $(document).ready(function () {
     let description = $("#description").val();
     let tag = $("#tag option:selected").val();
     if (tag === "CSS") {
-      tag = 1
+      tag = 1;
     } else if (tag === "Database") {
-      tag = 2
+      tag = 2;
     } else if (tag === "Html") {
-      tag = 3
+      tag = 3;
     } else if (tag === "Github") {
-      tag = 4
+      tag = 4;
     } else if (tag === "JavaScript") {
-      tag = 5
+      tag = 5;
     }
 
     $.ajax({
-      url:`/api/resources/${id}/newPost`,
-      method: 'POST',
+      url: `/api/resources/1/newPost`,
+      method: "POST",
       data: {
-        title, imageURL, linkURL, description, tag
+        title,
+        imageURL,
+        linkURL,
+        description,
+        tag,
+      },
+      success: function (response) {
+          if ((response.d = true)) {
+          window.location = "/";
+        }
+      },
+      failure: function (response) {
+        alert(response.d);
       }
-    })
-      .then(function (data) {
-
     });
+      window.location = "/";
   });
-
-
-
 });
-
-
-
-
-
