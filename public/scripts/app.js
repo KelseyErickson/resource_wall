@@ -130,6 +130,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
+      //what id is this taking
       url:`/api/resources/${id}/newPost`,
       method: 'POST',
       data: {

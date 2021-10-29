@@ -79,15 +79,26 @@ module.exports = (db) => {
 
   //Add a resource
   router.post("/:id/newPost", (req, res)=> {
+    //what id are we getting here?
+    router.get("/", (req, res) => {
+
+      const templateVars = {
+
+        user_id: req.session.user_id
+
+      };
+
+
     db.query(`insert into resources (user_id, tag_id, title, description, url, thumbnail_photo_url)
     values ($1, $2, $3, $4, $5, $6);`,
+
     [req.session.user_id, req.body.tag, req.body.title, req.body.description, req.body.linkURL, req.body.imageURL])
     .then(data => {
-      res.render("index")
+      res.redirect("/", templateVars)
 
     })
   })
-
+});
  return router;
 };
 
