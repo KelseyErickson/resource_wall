@@ -14,7 +14,11 @@ module.exports = (db) => {
     const user = (req.session.user_id);
 
     const value = [user];
-    let query = `SELECT * FROM resources WHERE user_id = $1`;
+    let query = `SELECT *
+    FROM resources 
+    WHERE user_id = $1
+    OR resources.id IN (SELECT resource_id 
+    FROM walls WHERE user_id = $1)`;
     console.log(query);
     console.log(user)
     db.query(query, value)

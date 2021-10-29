@@ -27,14 +27,14 @@ $(document).ready(function () {
       <div class="card-body">
         <h5 class="card-title">${resourceData.title}</h5>
         <p class="card-text">${resourceData.description}</p>
-        <a href=${resourceData.url} class="btn btn-primary">Go To Resource</a>
+        <a href=${resourceData.url} class="btn btn-primary">Go To Zource</a>
       </div>
       <footer>
       <a href="/details/${resourceData.id}" class="detailsLink" >Details</a>
       <div>
       <a>${resourceData.rating} </a><a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
       <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>
-      <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+      <button class="btn btn-like" data-id="${resourceData.id}" type="submit"><i class="far fa-heart"></i></button>
       <div>
         </footer>
         </form>
@@ -96,6 +96,18 @@ $(document).ready(function () {
       loadResources();
     });
   });
+
+  $('#resource-container').on("click", '.btn-like', function (event) {
+    event.preventDefault();
+    const id = $(this).data("id");
+    console.log(id, "id in app")
+    $(this).parent().find(".btn-like").addClass("bnt-like-click")
+    $.ajax(`/api/resources/${id}/like`, { method: 'POST' })
+       .then(function (data) {
+        loadResources()
+       });
+
+  })
 
   $(".newPostForm").on("submit", function (event) {
     const id = $(this).data("id");

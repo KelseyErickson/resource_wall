@@ -69,8 +69,17 @@ module.exports = (db) => {
       [req.params.id]
     ).then((data) => {
       res.json(data);
-    });
-  });
+    })
+  })
+
+  router.post("/:id/like", (req, res)=> {
+    console.log(req.session.user_id, req.params.id)
+    db.query(` insert into walls (user_id, resource_id) values ($1, $2);`, [req.session.user_id, req.params.id])
+    .then(data => {
+      res.json(data);
+    })
+  })
+
 
   //Add a resource
   router.post("/1/newPost", (req, res) => {
