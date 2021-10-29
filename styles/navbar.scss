@@ -5,6 +5,7 @@
 
 nav {
   height: 5rem;
+  font-weight: 700;
 
 
 .searchBtn {
@@ -14,11 +15,12 @@ nav {
 }
 
 #searchForm {
-  width: 25rem;
+  width: 40rem;
+  margin-right: 5rem;
 
  }
 
-}
+
 .searchBtn:hover{
   background-color: white;
   border-color: black;
@@ -34,9 +36,21 @@ nav {
 
  .btn-logout{
   color: rgba(255,255,255,.55);
-  margin:0;
+  margin-right: 2rem;
  }
 
+ .navbar-brand{
+   margin: 0rem 6rem;
+   font-size: 2rem;
+   font-weight: bold;
+   font-family: 'Titillium Web', sans-serif;
+
+ }
+
+ .nav-item {
+   margin: 0rem 0.5rem;
+ }
+}
 
 
 
