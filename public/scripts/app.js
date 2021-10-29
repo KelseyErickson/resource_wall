@@ -39,7 +39,7 @@ $(document).ready(function () {
       <div>
       <a>${resourceData.rating} </a><a class="btn-upvote" data-id="${resourceData.id}"><i class="fas fa-arrow-up"></i></a>
       <a class="btn-downvote" data-id="${resourceData.id}"><i class="fas fa-arrow-down"></i></a>
-      <button class="btn btn-like" type="submit"><i class="far fa-heart"></i></button>
+      <button class="btn btn-like" data-id="${resourceData.id}" type="submit"><i class="far fa-heart"></i></button>
       <div>
         </footer>
         </form>
@@ -102,6 +102,18 @@ $(document).ready(function () {
     const id = $(this).data("id");
     console.log(id)
     $.ajax(`/api/resources/${id}/downvote`, { method: 'POST' })
+       .then(function (data) {
+        loadResources()
+       });
+
+  })
+
+  $('#resource-container').on("click", '.btn-like', function (event) {
+    event.preventDefault();
+    const id = $(this).data("id");
+    console.log(id, "id in app")
+    // $(this).parent().find(".btn-like").addClass("bnt-like-click")
+    $.ajax(`/api/resources/${id}/like`, { method: 'POST' })
        .then(function (data) {
         loadResources()
        });
