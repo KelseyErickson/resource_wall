@@ -82,7 +82,7 @@ module.exports = (db) => {
 
 
   //Add a resource
-  router.post("/1/newPost", (req, res) => {
+  router.post("/:id/newPost", (req, res) => {
     db.query(
       `insert into resources (user_id, tag_id, title, description, url, thumbnail_photo_url)
     values ($1, $2, $3, $4, $5, $6);`,

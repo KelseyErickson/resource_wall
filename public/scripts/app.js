@@ -133,7 +133,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-      url: `/api/resources/1/newPost`,
+      url: `/api/resources/${id}/newPost`,
       method: "POST",
       data: {
         title,
