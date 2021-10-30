@@ -1,10 +1,4 @@
-/*
- * All routes for resources are defined here
- * Since this file is loaded in server.js into api/resources,
- *   these routes are mounted onto /resources
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
+// Resource Routes
 const { query } = require("express");
 const express = require("express");
 const router = express.Router();
@@ -13,7 +7,6 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     let query = `SELECT * FROM resources
                 ORDER BY rating`;
-    console.log(query);
     db.query(query)
       .then((data) => {
         const resources = data.rows;
@@ -37,18 +30,20 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-
-    console.log(query, params);
   });
 
-  //Add comments to detials page
+  //Add comments to detaills page
   router.post("/:id/reviews", (req, res) => {
-    console.log(req.body);
     db.query(
       `insert into reviews (user_id, resource_id, comment) values ($1, $2,$3);`,
       [req.session.user_id, req.params.id, req.body.comment]
     ).then((data) => {
       res.redirect("/details/" + req.params.id);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
   });
 
@@ -59,6 +54,11 @@ module.exports = (db) => {
       [req.params.id]
     ).then((data) => {
       res.json(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
   });
 
@@ -70,18 +70,29 @@ module.exports = (db) => {
     ).then((data) => {
       res.json(data);
     })
-  })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
+
+ // Add Liked resource to walls
   router.post("/:id/like", (req, res)=> {
-    console.log(req.session.user_id, req.params.id)
     db.query(` insert into walls (user_id, resource_id) values ($1, $2);`, [req.session.user_id, req.params.id])
     .then(data => {
       res.json(data);
     })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   })
 
 
-  //Add a resource
+  // Add a resource
   router.post("/:id/newPost", (req, res) => {
     db.query(
       `insert into resources (user_id, tag_id, title, description, url, thumbnail_photo_url)

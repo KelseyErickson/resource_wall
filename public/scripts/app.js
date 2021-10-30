@@ -6,7 +6,6 @@
 $(document).ready(function () {
   const renderResources = (resources) => {
     const container = $("#resource-container");
-
     container.empty();
 
     // loops through resources
@@ -44,10 +43,10 @@ $(document).ready(function () {
   };
 
   const loadResources = () => {
-    //  load existing resources
+  //  Load existing resources
     $.ajax("/api/resources", { method: "GET" }).then(function (data) {
       renderResources(data.resources);
-    });
+    })
   };
 
   loadResources();
@@ -78,29 +77,24 @@ $(document).ready(function () {
   $("#resource-container").on("click", ".btn-upvote", function (event) {
     event.preventDefault();
     const id = $(this).data("id");
-    console.log(id);
-    $.ajax(`/api/resources/${id}/upvote`, { method: "POST" }).then(function (
-      data
-    ) {
+    $.ajax(`/api/resources/${id}/upvote`, { method: "POST" }).then(function (data) {
       loadResources();
     });
   });
 
+  // DownVote button
   $("#resource-container").on("click", ".btn-downvote", function (event) {
     event.preventDefault();
     const id = $(this).data("id");
-    console.log(id);
-    $.ajax(`/api/resources/${id}/downvote`, { method: "POST" }).then(function (
-      data
-    ) {
+    $.ajax(`/api/resources/${id}/downvote`, { method: "POST" }).then(function (data) {
       loadResources();
     });
   });
 
+  // Like Button
   $('#resource-container').on("click", '.btn-like', function (event) {
     event.preventDefault();
     const id = $(this).data("id");
-    console.log(id, "id in app")
     $(this).parent().find(".btn-like").addClass("bnt-like-click")
     $.ajax(`/api/resources/${id}/like`, { method: 'POST' })
        .then(function (data) {
@@ -109,11 +103,10 @@ $(document).ready(function () {
 
   })
 
+  // Grab new post information from the form and post it
   $(".newPostForm").on("submit", function (event) {
     const id = $(this).data("id");
     event.preventDefault();
-    // console.log(event);
-    // window.location = "/";
     const postData = $(this);
     let title = $("#postTitle").val();
     let imageURL = $("#ImageUrl").val();
